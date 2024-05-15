@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONDeli-Food</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff8e1;
+            color: #5c4033;
+        }
+        header {
+            background-color: #ffca28;
+            color: #5c4033;
+            text-align: center;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header p {
+            font-style: italic;
+            margin: 5px 0 20px;
+        }
+        nav {
+            text-align: center;
+            background-color: #ffca28;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #5c4033;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #5c4033;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #ffffff;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product h2 {
+            color: #ffca28;
+        }
+        .product button {
+            background-color: #ffca28;
+            color: #5c4033;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .product button:hover {
+            background-color: #ffc107;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #5c4033;
+            color: #ffca28;
+        }
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ffca28;
+            padding: 10px;
+            border: 1px solid #5c4033;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MONDeli-Food</h1>
+    <p>Chọn MONDeli-Food - Trọn dinh dưỡng - Trọn vị tự nhiên</p>
+</header>
+
+<nav>
+    <a href="#home">Trang chủ</a>
+    <a href="#products">Sản phẩm</a>
+    <a href="#contact">Liên hệ</a>
+</nav>
+
+<div class="container" id="home">
+    <h2>Về chúng tôi</h2>
+    <p>Công ty TNHH MONDeli-Food chuyên kinh doanh chủ yếu về trái cây sấy dẻo. Các sản phẩm của chúng tôi bao gồm mãng cẩu sấy dẻo, dứa sấy dẻo, xoài sấy dẻo và chanh dây sấy dẻo.</p>
+</div>
+
+<div class="container" id="products">
+    <h2>Sản phẩm</h2>
+    
+    <div class="product">
+        <h2>Mãng Cẩu Sấy Dẻo</h2>
+        <img src="mang-cau.jpg" alt="Mãng Cẩu Sấy Dẻo">
+        <p>Giá: 100,000 VND</p>
+        <button onclick="addToCart('Mãng Cẩu Sấy Dẻo', 100000)">Thêm vào giỏ hàng</button>
+    </div>
+    
+    <div class="product">
+        <h2>Dứa Sấy Dẻo</h2>
+        <img src="dua.jpg" alt="Dứa Sấy Dẻo">
+        <p>Giá: 90,000 VND</p>
+        <button onclick="addToCart('Dứa Sấy Dẻo', 90000)">Thêm vào giỏ hàng</button>
+    </div>
+    
+    <div class="product">
+        <h2>Xoài Sấy Dẻo</h2>
+        <img src="xoai.jpg" alt="Xoài Sấy Dẻo">
+        <p>Giá: 120,000 VND</p>
+        <button onclick="addToCart('Xoài Sấy Dẻo', 120000)">Thêm vào giỏ hàng</button>
+    </div>
+    
+    <div class="product">
+        <h2>Chanh Dây Sấy Dẻo</h2>
+        <img src="chanh-day.jpg" alt="Chanh Dây Sấy Dẻo">
+        <p>Giá: 110,000 VND</p>
+        <button onclick="addToCart('Chanh Dây Sấy Dẻo', 110000)">Thêm vào giỏ hàng</button>
+    </div>
+</div>
+
+<div class="cart" id="cart">
+    <h3>Giỏ hàng</h3>
+    <ul id="cartItems"></ul>
+    <p>Tổng: <span id="totalPrice">0</span> VND</p>
+    <button onclick="checkout()">Thanh toán</button>
+</div>
+
+<footer id="contact">
+    <p>Liên hệ qua Fanpage chính thức: <a href="https://www.facebook.com/mondelifood" target="_blank">MONDeli-Food</a></p>
+</footer>
+
+<script>
+    const cart = [];
+
+    function addToCart(productName, price) {
+        cart.push({ productName, price });
+        renderCart();
+    }
+
+    function renderCart() {
+        const cartItems = document.getElementById('cartItems');
+        const totalPrice = document.getElementById('totalPrice');
+        cartItems.innerHTML = '';
+        let total = 0;
+
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.productName} - ${item.price} VND`;
+            cartItems.appendChild(li);
+            total += item.price;
+        });
+
+        totalPrice.textContent = total;
+    }
+
+    function checkout() {
+        alert('Thanh toán thành công!');
+        cart.length = 0;
+        renderCart();
+    }
+</script>
+
+</body>
+</html>
